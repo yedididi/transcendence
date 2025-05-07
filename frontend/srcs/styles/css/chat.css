@@ -1,0 +1,55 @@
+.chat-container {
+	max-width: 800px;
+	height: 500px;
+	margin: 0 auto;
+	padding: 10px;
+}
+.chat-log {
+	border-radius: 0.375rem;
+	max-width: 330px;
+	padding: 1rem;
+	height: 440px;
+	gap: 3px;
+	margin-bottom: 10px;
+	overflow-y: scroll; /* 스크롤 기능 유지 */
+    -ms-overflow-style: none; /* IE 및 Edge */
+    scrollbar-width: none; /* Firefox */
+	border: 1px solid #ccc;
+	padding: 10px;
+	background-color: rgba(0,0,0,0.3);
+}
+.chat-log::-webkit-scrollbar { 
+    display: none; /* Chrome, Safari, Opera */
+}
+.chat-message {
+	margin-bottom: 10px;
+	clear: both;
+}
+.chat-message.self {
+	text-align: right;
+}
+.chat-message.other {
+	text-align: left;
+}
+.chat-message .message-content {
+	padding: 10px;
+	border-radius: 5px;
+	max-width: 70%;
+	display: inline-block;
+	color: black;
+	word-break: break-all; /* 긴 단어를 줄바꿈하여 여러 줄에 걸쳐 표시 */
+    overflow-wrap: break-word; /* 긴 단어가 컨테이너를 넘어갈 경우 줄바꿈 */
+}
+.chat-message.self .message-content {
+	background-color: white; /* Light green for sender */
+	float: right;
+}
+.chat-message.other .message-content {
+	
+	background-color: whitesmoke; /* Light gray for others */
+	float: left;
+}
+.chat-message .username {
+	font-weight: bold;
+	color:black;
+}

@@ -1,0 +1,11 @@
+Django==4.2.15
+
+psycopg2-binary
+channels
+channels_redis
+daphne
+djangorestframework
+djangorestframework-simplejwt
+celery[redis]
+django-redis
+django-eventstream

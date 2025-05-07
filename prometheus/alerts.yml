@@ -1,0 +1,103 @@
+groups:
+- name: alert_rules
+  rules:
+  - alert: HighCPUUsage
+    expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 90
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High CPU Usage on {{ $labels.instance }}"
+      description: "CPU usage is above 90% on {{ $labels.instance }}"
+
+  - alert: LowDiskSpace
+    expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Low Disk Space on {{ $labels.instance }}"
+      description: "Disk space is below 10% on {{ $labels.instance }}"
+  
+  - alert: HighMemoryUsage
+    expr: (node_memory_MemTotal_bytes - node_memory_MemFree_bytes) / node_memory_MemTotal_bytes * 100 > 90
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High Memory Usage on {{ $labels.instance }}"
+      description: "Memory usage is above 90% on {{ $labels.instance }}"
+
+  - alert: LowMemoryAvailable
+    expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Low Memory Available on {{ $labels.instance }}"
+      description: "Available memory is below 10% on {{ $labels.instance }}"
+
+  - alert: HighSwapUsage
+    expr: node_memory_SwapTotal_bytes > 0 and (node_memory_SwapTotal_bytes - node_memory_SwapFree_bytes) / node_memory_SwapTotal_bytes * 100 > 50
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High Swap Usage on {{ $labels.instance }}"
+      description: "Swap usage is above 50% on {{ $labels.instance }}"
+
+  - alert: HighNetworkTraffic
+    expr: rate(node_network_receive_bytes_total[5m]) > 10000000 or rate(node_network_transmit_bytes_total[5m]) > 10000000
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High Network Traffic on {{ $labels.instance }}"
+      description: "Network traffic is above 10MB/s on {{ $labels.instance }}"
+
+  - alert: NetworkInterfaceDown
+    expr: node_network_up{device!~"lo"} == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Network Interface Down on {{ $labels.instance }}"
+      description: "Network interface {{ $labels.device }} is down on {{ $labels.instance }}"
+
+  - alert: HighProcessCount
+    expr: node_procs_running > 200
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High Process Count on {{ $labels.instance }}"
+      description: "Number of running processes is above 200 on {{ $labels.instance }}"
+
+  - alert: ZombieProcessesExist
+    expr: node_procs_zombie > 0
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Zombie Processes Exist on {{ $labels.instance }}"
+      description: "There are zombie processes on {{ $labels.instance }}"
+  
+  - alert: SystemReboot
+    expr: time() - node_boot_time_seconds < 300
+    for: 0m
+    labels:
+      severity: info
+    annotations:
+      summary: "System Reboot on {{ $labels.instance }}"
+      description: "{{ $labels.instance }} has been rebooted recently"
+
+  - alert: NTPSyncFailed
+    expr: node_ntp_sync_status == 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "NTP Sync Failed on {{ $labels.instance }}"
+      description: "NTP synchronization failed on {{ $labels.instance }}"
+
+  

@@ -1,0 +1,125 @@
+name: pingpong
+
+services:
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    init: true
+    ports:
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - pingpong_network
+    volumes:
+      - ./frontend/srcs:/var/www/html
+    restart: always
+
+  backend:
+    container_name: backend
+    build: ./backend
+    init: true
+    ports:
+      - "8000:8000"
+      - "587:587"
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+      - redis
+    networks:
+      - pingpong_network
+    volumes:
+      - ./backend/srcs:/app
+    restart: always
+
+  db:
+    container_name: db
+    build: ./db
+    init: true
+    expose:
+      - "5432"
+    env_file: 
+      - ./.env
+    networks:
+      - pingpong_network
+    restart: always
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - pingpong_network
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+    ports:
+      - 9090:9090
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=45d'
+      - '--storage.tsdb.retention.size=10GB'
+    depends_on:
+      - alertmanager
+    networks:
+      - pingpong_network
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      - pingpong_network
+
+  alertmanager: 
+    image: prom/alertmanager:latest
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+    ports:
+      - 9093:9093
+    env_file: 
+      - ./.env
+    networks:
+      - pingpong_network
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+    ports:
+      - 3000:3000
+    env_file: 
+      - ./.env
+    networks:
+      - pingpong_network
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /dev/dis:/dev/disk:ro
+    ports:
+      - 8080:8080
+    networks:
+      - pingpong_network
+
+networks:
+  pingpong_network:
+    name: pingpong_network
+    driver: bridge

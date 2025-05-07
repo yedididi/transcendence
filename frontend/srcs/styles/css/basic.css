@@ -1,0 +1,252 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  color: aliceblue;
+  user-select: none;
+  background-color: rgb(39, 37, 32);
+}
+.background {
+  background-image: url("../../assets/images/swirl_background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.form-basic1 {
+  padding: 1rem;
+  width: 600px;
+  height: 200px;
+  display: flex;
+  flex-direction: column; /* Ensure elements are stacked vertically */
+  justify-content: space-between; /* Create space between elements */
+  align-items: center; /* Center elements horizontally */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color : rgba(255,255,255,0);
+}
+#loginTitle {
+  font-size: 80px;
+  font-family:verdana, fantasy;
+  color:rgba(255,255,255,0.9);
+}
+.form-basic2 {
+  padding: 1rem;
+  width: 600px;
+  height: 400px;
+  display: flex;
+  flex-direction: column; /* Ensure elements are stacked vertically */
+  justify-content: space-between; /* Create space between elements */
+  align-items: center; /* Center elements horizontally */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 20px;
+  background-color : rgba(255,255,255,0.3);
+  backdrop-filter: blur(15px);  /* 요소 뒤에서 효과 적용 */
+  box-shadow: 2px 7px 15px 8px rgba(0,0,0,0.3); /* 그림자 적용 */
+}
+.h3 {
+  color:black;
+  font-family:verdana, fantasy;
+}
+.fw-normal {
+  color:black;
+  font-family:verdana, fantasy;
+}
+#otpInput {
+  border-radius: 10px;
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  padding: 10px; /* 입력 상자 내 여백 조절 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  border: none; /* 테두리 제거 */
+  width: 150px; /* 입력 상자 너비 조절 */
+  height: 40px; /* 입력 상자 높이 조절 */
+  outline:none;
+}
+#otpInput::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+.form-basic-chat {
+  width: 400px;
+  height: 500px;
+  max-width: 330px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column; /* Ensure elements are stacked vertically */
+  justify-content: space-between; /* Create space between elements */
+  border-radius: 20px;
+  background-color : rgba(255,255,255,0.3);
+  backdrop-filter: blur(15px);  /* 요소 뒤에서 효과 적용 */
+  box-shadow: 2px 7px 15px 8px rgba(0,0,0,0.3); /* 그림자 적용 */
+  top: 50%;
+  left: 0;
+}
+#chat-message-input {
+  outline:none;
+  box-shadow:none;
+}
+.gameModeSelectBox {
+  width: 1000px;
+  height: 500px;
+  position: relative;
+  border-radius: 20px;
+  background-color : rgba(255,255,255,0.3);
+  backdrop-filter: blur(15px);  /* 요소 뒤에서 효과 적용 */
+  box-shadow: 2px 7px 15px 8px rgba(0,0,0,0.3); /* 그림자 적용 */
+}
+.gameModeButtons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -150px 0 0 -150px;
+  width: 300px;
+  height: 300px;
+}
+.playerNameInputBox {
+  width: 1000px;
+  height: 500px;
+  position: relative;
+  border-radius: 20px;
+  background-color : rgba(255,255,255,0.3);
+  backdrop-filter: blur(15px);  /* 요소 뒤에서 효과 적용 */
+  box-shadow: 2px 7px 15px 8px rgba(0,0,0,0.3); /* 그림자 적용 */
+}
+.playerNameButtons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.playerNameButtonsTournament {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 정확한 가운데 배치 */
+}
+.form-pingpong {
+  width: 1400px;
+  height: 900px;
+}
+.form-result {
+  display: flex;          /* flexbox 레이아웃 적용 */
+  flex-direction: column;  /* 요소들을 수직으로 배치 */
+  justify-content: center; /* 각 줄의 요소들을 수평 중앙 정렬 */
+  align-items: center;     /* 각 줄의 요소들을 수직 중앙 정렬 */
+  max-width: 600px;
+  padding: 1rem;
+  color: white;
+  font-size: 2rem;
+}
+.form-result > div {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+.form-result > div > span { 
+  width: 250px;
+}
+.form-result > div > pre { 
+  width: 100px;
+}
+#mainWindow {
+  position: relative; /* #scoreOverlay의 position: absolute를 위한 기준 */
+  width: 1400px; /* 너비를 1400px로 설정 */
+  margin: 0 auto; /* 수평 중앙 정렬 */
+}
+#scoreOverlay {
+  display: flex;          /* flexbox 레이아웃 적용 */
+  flex-direction: column;  /* 요소들을 수직으로 배치 */
+  justify-content: center; /* 각 줄의 요소들을 수평 중앙 정렬 */
+  align-items: center;     /* 각 줄의 요소들을 수직 중앙 정렬 */
+  position: absolute;
+  top: -105px; /* 화면 밖 상단 배치 (필요에 따라 값 조정) */
+  left: 50.6%;
+  transform: translateX(-50%); /* 수평 중앙 정렬 */
+  z-index: 10; /* 다른 요소 위에 표시 */
+  padding: 1rem;
+  color: white;
+  font-size: 1.5rem;
+  max-width: 100%;
+}
+#scoreOverlay > div {  /* #scoreOverlay 내부의 div 요소들에 스타일 적용 */
+  display: flex;
+  justify-content: center; /* 각 줄 내부 요소들을 수평 중앙 정렬 */
+  align-items: center;      /* 각 줄 내부 요소들을 수직 중앙 정렬 */
+  width: 100%;              /* 각 줄이 전체 너비를 차지하도록 설정 */
+  text-align: center;
+}
+#scoreOverlay > div > span { 
+  width: 250px;
+}
+#scoreOverlay > div > pre { 
+  width: 100px;
+}
+.countdown-overlay {
+  position: absolute;
+  top: 20%;
+  left: 50.6%;
+  transform: translate(-50%, -50%); /* 화면 중앙에 배치 */
+  font-size: 5rem; /* 또는 원하는 크기 */
+  font-weight: bold;
+  color: black;
+  display: none; /* 초기에는 숨김 */
+  flex-direction: column; /* 세로 방향 배치 */
+  align-items: center; /* 수평 중앙 정렬 */
+  justify-content: center; /* 수직 중앙 정렬 */
+}
+.form-basic .form-floating:focus-within {
+  z-index: 2;
+}
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}	
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}	
+.btn-bd-primary {
+  --bd-violet-bg: #FFFFFF;
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;	
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-black);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-black);
+  --bs-btn-hover-bg: #FFFFFF;
+  --bs-btn-hover-border-color: #FFFFFF;
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #FFFFFF;
+  --bs-btn-active-border-color: #FFFFFF;
+}
+#languageSwitcher {
+  position: absolute;
+  top: 10px;       /* Distance from the top of the page */
+  right: 10px;     /* Distance from the right edge of the page */
+  z-index: 1000;   /* Ensure it's above other elements */
+  padding: 5px;    /* Optional padding for better appearance */
+  background-color: white;  /* Optional: Set background color */
+  border: 1px solid #ccc;    /* Optional: Set a border */
+  border-radius: 5px;        /* Optional: Rounded corners */
+}
